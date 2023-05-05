@@ -56,9 +56,9 @@ export default function TextForm(props) {
 
     }
     const CopyText = () => {
+        
         let newText = document.getElementById('exampleFormControlTextarea1');
-        newText.select()
-        navigator.clipboard.writeText(newText.value)
+        navigator.clipboard.writeText(newText.value);
         props.showAlert('success', 'Copy your text');
 
     }
@@ -72,8 +72,6 @@ export default function TextForm(props) {
     }
     const [text, setText] = useState("");
 
-    let word = text.split(" ");
-    let wordCount = (word[word.length - 1] === "") ? word.length - 1 : word.length;
     return (
         <>
             <div className="container my-3">
@@ -86,19 +84,19 @@ export default function TextForm(props) {
                         </div>
                         <div className="row ">
                             <div className="col-auto">
-                                <button className="btn btn-primary btn-sm" onClick={UpperCase}>UpperCase</button>
+                                <button disabled={text.length === 0} className="btn btn-primary btn-sm" onClick={UpperCase}>UpperCase</button>
                             </div>
                             <div className="col-auto">
-                                <button className="btn btn-primary btn-sm" onClick={LowerCase}>LowerCase</button>
+                                <button disabled={text.length === 0} className="btn btn-primary btn-sm" onClick={LowerCase}>LowerCase</button>
                             </div>
                             <div className="col-auto">
-                                <button className="btn btn-primary btn-sm" onClick={RemoveSpace}>Remove Extra Spaces</button>
+                                <button disabled={text.length === 0} className="btn btn-primary btn-sm" onClick={RemoveSpace}>Remove Extra Spaces</button>
                             </div>
                             <div className="col-auto">
-                                <button className="btn btn-primary btn-sm" onClick={CopyText}>Copy Text</button>
+                                <button disabled={text.length === 0} className="btn btn-primary btn-sm" onClick={CopyText}>Copy Text</button>
                             </div>
                             <div className="col-auto">
-                                <button className="btn btn-primary btn-sm" onClick={ClearText}>Clear</button>
+                                <button disabled={text.length === 0} className="btn btn-primary btn-sm" onClick={ClearText}>Clear</button>
                             </div>
                         </div>
 
@@ -108,13 +106,13 @@ export default function TextForm(props) {
                         <div className="row justify-content-center">
                             <div className="col-auto text-center">
                                 <div className="row mt-3">
-                                    <p>{wordCount} : <b>Word</b></p>
+                                    <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} : <b>Word</b></p>
                                 </div>
                                 <div className="row">
                                     <p>{text.length} : <b>Character</b></p>
                                 </div>
                                 <div className="row">
-                                    <p>{(0.008 * wordCount).toFixed(3)} : <b>Minutes to read</b></p>
+                                    <p>{(0.008 * (text.split(" ").filter((element)=>{return element.length!==0}).length)).toFixed(3)} : <b>Minutes to read</b></p>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +129,7 @@ export default function TextForm(props) {
                         <div className="card d-none" id="card"
                             style={{ backgroundColor: props.mode === 'dark' ? "#1f2937" : 'white', color: props.mode === 'dark' ? "white" : 'black' }}>
                             <div className="card-body">
-                                <p className="card-text">{text === '' ? 'Enter the text in the textarea' : text}</p>
+                                <p className="card-text">{text === '' ? 'Nothing to Preview' : text}</p>
                             </div>
                         </div>
                     </div>
