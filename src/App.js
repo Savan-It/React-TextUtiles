@@ -3,12 +3,12 @@ import './App.css';
 import Navbar from './Components/Navbar';
 import TextForm from './Components/TextForm';
 import Alert from './Components/Alert';
-// import About from './Components/About';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-// } from "react-router-dom";
+import About from './Components/About';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -21,7 +21,7 @@ function App() {
     })
     setTimeout(() => {
       setAlert(null)
-    }, 2000);
+    }, 1500);
   }
   const toggleMode = () => {
     if (mode === 'light') {
@@ -35,20 +35,20 @@ function App() {
   }
 
   return (
-    // <Router>
+    <Router>
       <>
         <Navbar mode={mode} toggleMode={toggleMode} showAlert={showAlert} />
         <Alert alert={alert} />
-        {/* <Switch> */}
-          {/* <Route exact path="/About"> */}
-            {/* <About mode={mode}/> */}
-          {/* </Route> */}
-          {/* <Route exact path="/"> */}
+        <Switch>
+          <Route exact path="/About">
+            <About mode={mode}/>
+          </Route>
+          <Route exact path="/">
             <TextForm heading="Enter the Text to Analyze" mode={mode} showAlert={showAlert} />
-          {/* </Route> */}
-        {/* </Switch> */}
+          </Route>
+        </Switch>
       </>
-    // </Router>
+    </Router>
   );
 }
 
