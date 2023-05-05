@@ -56,9 +56,8 @@ export default function TextForm(props) {
 
     }
     const CopyText = () => {
-        
-        let newText = document.getElementById('exampleFormControlTextarea1');
-        navigator.clipboard.writeText(newText.value);
+    
+        navigator.clipboard.writeText(text);
         props.showAlert('success', 'Copy your text');
 
     }
@@ -106,13 +105,13 @@ export default function TextForm(props) {
                         <div className="row justify-content-center">
                             <div className="col-auto text-center">
                                 <div className="row mt-3">
-                                    <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} : <b>Word</b></p>
+                                    <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} : <b>Word</b></p>
                                 </div>
                                 <div className="row">
                                     <p>{text.length} : <b>Character</b></p>
                                 </div>
                                 <div className="row">
-                                    <p>{(0.008 * (text.split(" ").filter((element)=>{return element.length!==0}).length)).toFixed(3)} : <b>Minutes to read</b></p>
+                                    <p>{(0.008 * (text.split(/\s+/).filter((element)=>{return element.length!==0}).length)).toFixed(3)} : <b>Minutes to read</b></p>
                                 </div>
                             </div>
                         </div>
